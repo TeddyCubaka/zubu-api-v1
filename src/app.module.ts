@@ -9,7 +9,6 @@ import { ProductController } from './controllers/product.controller';
 import { PropretyController } from './controllers/proprety.controller';
 import { PropretyService } from './services/proprety.service';
 
-// imports: [MongooseModule.forRoot(process.env.MONGODB_URI)],
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/zubu_v2'),
