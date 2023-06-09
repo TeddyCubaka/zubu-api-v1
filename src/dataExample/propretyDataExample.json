@@ -1,0 +1,46 @@
+{
+  "owner": "uuid",
+  "type": "STUDIO",
+  "address": "city/township/quoter/avenue/number",
+  "rentalInformation": {
+    "propretyType": "STUDIO",
+    "availability": false,
+    "price": 2004000,
+    "guarantee": 4,
+    "monentaryCurrency": "CDF",
+    "localisation": "20°30'45'' 87°55'60'' ",
+    "lessorName": "Teddy Cubaka",
+    "lessorContacts": ["+243 995 867 384", "teddycubaka96@gmail.com"]
+  },
+  "announcement": {
+    "announcementPeriod": ["29-06-2023", "15-07-2023"],
+    "isAvailable": false
+  },
+  "gallery": [
+    {
+      "url": "https://media.tenor.com/rVPiydTmBR0AAAAM/i-gotchu.gif",
+      "width": 100,
+      "height": 60,
+      "size": 1839878,
+      "createAt": "07-06-2023",
+      "deleteAt": "07-06-2023",
+      "uploadAt": "07-06-2023",
+      "publicId": "huhuih763uuiu7383uiy37",
+      "assetId": "uuiddidiidudiid_883Ii"
+    }
+  ],
+  "rooms": [
+    {
+      "room": "saloon",
+      "number": 2
+    }
+  ],
+  "tenantCharge": [
+    {
+      "charge": "electricity",
+      "price": "3000 fc"
+    }
+  ],
+  "visits": ["uuid"],
+  "questions": ["uuid"]
+}
