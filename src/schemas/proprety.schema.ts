@@ -16,9 +16,9 @@ enum Currencies {
 }
 class RentalInformationType {
   @Prop()
-  propretyType: string;
+  roomType: string;
   @Prop()
-  availability: boolean;
+  isAvailable: boolean;
   @Prop()
   price: number;
   @Prop()

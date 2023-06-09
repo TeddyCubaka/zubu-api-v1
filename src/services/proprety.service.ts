@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import {
+  FilterPropreties,
+  FindPropretiesFilter,
+} from 'src/interfaces/proprety.type';
 import { Proprety, PropretyDocument } from 'src/schemas/proprety.schema';
 
 @Injectable()
@@ -43,5 +47,22 @@ export class PropretyService {
 
   async delete(id: string): Promise<any> {
     return await this.PropretyModel.findByIdAndRemove(id);
+  }
+
+  async findAvailables(): Promise<Proprety[]> {
+    return await this.PropretyModel.find().exec();
+  }
+
+  async readManyById(propretiesIds: string): Promise<Proprety[]> {
+    return await this.PropretyModel.find({
+      _id: { $in: propretiesIds.split('plös') },
+    }).exec();
+  }
+
+  async chakeAddress(address: string): Promise<any> {
+    return this.PropretyModel.findOne({ address: address })
+      .exec()
+      .then((data) => data)
+      .catch((err) => err);
   }
 }

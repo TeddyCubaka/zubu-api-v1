@@ -9,7 +9,6 @@ import {
   Put,
   Res,
 } from '@nestjs/common';
-import { response } from 'express';
 import { Proprety } from 'src/schemas/proprety.schema';
 import { PropretyService } from 'src/services/proprety.service';
 
@@ -29,13 +28,39 @@ export class PropretyController {
     return response.status(HttpStatus.OK).json({ propreties });
   }
 
-  @Get('/:id')
+  @Get('/select/:propretiesIds')
+  async selectMayById(
+    @Param('propretiesIds') propretiesIds: string,
+    @Res() response,
+  ) {
+    const propreties = await this.propretyService.readManyById(propretiesIds);
+    return response.status(HttpStatus.OK).json(propreties);
+  }
+
+  @Get('/proprety/:id')
   async getOneById(@Param('id') id: string, @Res() response) {
     const proprety = await this.propretyService.readById(id);
     return response.status(HttpStatus.OK).json({ proprety });
   }
 
-  @Put('/:id')
+  @Get('/chakeAddress')
+  async chakeAddress(@Body('address') address: string, @Res() response) {
+    const chacker = await this.propretyService.chakeAddress(address);
+    if (chacker === null)
+      return response
+        .status(HttpStatus.OK)
+        .json({ canBeUsed: true, propretyIdOfThisAddress: chacker });
+    else if (chacker)
+      return response
+        .status(HttpStatus.OK)
+        .json({ canBeUsed: false, propretyIdOfThisAddress: chacker._id });
+    else
+      return response
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ chacker });
+  }
+
+  @Put('proprety/:id')
   async updateOneById(
     @Param('id') id: string,
     @Body() proprety: Proprety,
@@ -45,7 +70,7 @@ export class PropretyController {
     return response.status(HttpStatus.OK).json({ newProprety });
   }
 
-  @Delete('/:id')
+  @Delete('proprety/:id')
   async deleteOneById(@Param('id') id: string, @Res() response) {
     const propretyDelete = await this.propretyService.delete(id);
     return response.status(HttpStatus.OK).json({ propretyDelete });
