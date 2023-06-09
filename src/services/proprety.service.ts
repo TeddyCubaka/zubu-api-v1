@@ -14,7 +14,14 @@ export class PropretyService {
     return newProprety
       .save()
       .then((data) => data)
-      .catch((err) => err);
+      .catch((err) => {
+        if (err.code === 11000)
+          return {
+            message: "l'adresse saisie est déjà prise.",
+            err,
+          };
+        else return err;
+      });
   }
 
   async readAll(): Promise<Proprety[]> {
@@ -28,7 +35,10 @@ export class PropretyService {
   async update(id: string, Proprety: Proprety): Promise<Proprety> {
     return await this.PropretyModel.findByIdAndUpdate(id, Proprety, {
       new: true,
-    }).exec();
+    })
+      .exec()
+      .then((data) => data)
+      .catch((err) => err);
   }
 
   async delete(id: string): Promise<any> {
