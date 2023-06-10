@@ -1,10 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import {
-  FilterPropreties,
-  FindPropretiesFilter,
-} from 'src/interfaces/proprety.type';
 import { Proprety, PropretyDocument } from 'src/schemas/proprety.schema';
 
 @Injectable()

@@ -7,6 +7,7 @@ import { PropretyController } from './controllers/proprety.controller';
 import { PropretyService } from './services/proprety.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { UsersService } from './users/users.service';
 
 @Module({
   imports: [
