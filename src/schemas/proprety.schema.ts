@@ -1,20 +1,32 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
+import { Document } from 'mongoose';
 
 export type PropretyDocument = Proprety & Document;
 
-enum types {
+export enum types {
   OFFICE,
   HOUSE,
   STUDIO,
   SPACE,
   APARTMENT,
 }
-enum Currencies {
+export enum Currencies {
   USD,
   CDF,
 }
-class RentalInformationType {
+
+export enum TypeByRooms {
+  STUDIO,
+  F1,
+  F2,
+  F3,
+  F4,
+  F5,
+  F6,
+  F7,
+}
+
+export class RentalInformationType {
   @Prop()
   roomType: string;
   @Prop()

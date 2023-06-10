@@ -3,7 +3,7 @@
   "type": "STUDIO",
   "address": "city/township/quoter/avenue/number",
   "rentalInformation": {
-    "propretyType": "STUDIO",
+    "roomType": "STUDIO",
     "availability": false,
     "price": 2004000,
     "guarantee": 4,

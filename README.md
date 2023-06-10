@@ -14,6 +14,7 @@
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/TeddyCubaka/zubu-api-v1/develop?style=for-the-badge&color=blue)
 ![GitHub language count](https://img.shields.io/github/languages/count/TeddyCubaka/zubu-api-v1?color=blue&style=for-the-badge)
 ![GitHub top language](https://img.shields.io/github/languages/top/TeddyCubaka/zubu-api-v1?color=blue&style=for-the-badge)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/TeddyCubaka/zubu-api-v1?style=for-the-badge)
 <!-- ![GitHub deployments](https://img.shields.io/github/deployments/TeddyCubaka/zubu-api-v1/production?style=for-the-badge&color=blue) -->
 
 

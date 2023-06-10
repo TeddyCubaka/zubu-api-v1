@@ -4,16 +4,16 @@ export interface FilterPropreties {
   roomType?: string;
   type?: string;
   price?: priceFilterType;
-  guarantie?: number;
+  guarantee?: number;
 }
 
 export interface FindPropretiesFilter {
   city?: object;
   townShip?: object;
   type?: object;
-  'monentaryCurrency.roomType'?: object;
+  'rentalInformation.roomType'?: object;
   'rentalInformation.price'?: object;
-  'monentaryCurrency.guarantie'?: object;
+  'rentalInformation.guarantee'?: object;
 }
 
-export type priceFilterType = [string, string];
+export type priceFilterType = [number, number];

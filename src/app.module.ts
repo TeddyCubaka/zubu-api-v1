@@ -5,6 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Proprety, PropretySchema } from './schemas/proprety.schema';
 import { PropretyController } from './controllers/proprety.controller';
 import { PropretyService } from './services/proprety.service';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -12,6 +14,8 @@ import { PropretyService } from './services/proprety.service';
     MongooseModule.forFeature([
       { name: Proprety.name, schema: PropretySchema },
     ]),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController, PropretyController],
   providers: [AppService, PropretyService],
