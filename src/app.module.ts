@@ -7,11 +7,12 @@ import { PropretyController } from './controllers/proprety.controller';
 import { PropretyService } from './services/proprety.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { UsersService } from './users/users.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/zubu_v2'),
+    ConfigModule.forRoot({ isGlobal: true }),
+    MongooseModule.forRoot(process.env.DATABASE_URL),
     MongooseModule.forFeature([
       { name: Proprety.name, schema: PropretySchema },
     ]),
