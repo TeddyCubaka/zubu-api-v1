@@ -10,7 +10,7 @@ export class authMiddleware implements NestMiddleware {
       request.headers.authorization.split(' ')[1],
     );
     request.body.access = decodedJwtAccessToken;
-    console.log(decodedJwtAccessToken);
+    console.log(process.env.JWT_SECRET_KEY);
     next();
   }
 }
