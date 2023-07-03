@@ -23,7 +23,15 @@ export class UsersService {
       });
   }
 
+  async findOneByUsername(username: string): Promise<User | undefined> {
+    return this.UserModel.findOne({ username: username }).exec();
+  }
+
   async findOneByPhoneNumber(phoneNumber: string): Promise<User | undefined> {
     return this.UserModel.findOne({ phoneNumber: phoneNumber }).exec();
+  }
+
+  async findOneByMail(mail: string): Promise<User | undefined> {
+    return this.UserModel.findOne({ mail: mail }).exec();
   }
 }
