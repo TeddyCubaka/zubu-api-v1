@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { signupData } from 'src/interfaces/users.type';
 import { UsersService } from 'src/users/users.service';
@@ -39,7 +39,7 @@ export class AuthService {
       user = await this.usersService.findOneByPhoneNumber(connexionId);
 
     if (user === null) return { hasNotFound: true };
-    let isPasswordValid = await verifyPassord(passwordInputed, user.password);
+    const isPasswordValid = await verifyPassord(passwordInputed, user.password);
 
     if (!isPasswordValid) {
       return { hasNotFound: true };

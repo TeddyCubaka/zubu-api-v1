@@ -2,7 +2,6 @@ import {
   FilterPropreties,
   FindPropretiesFilter,
 } from 'src/interfaces/proprety.type';
-import { TypeByRooms } from 'src/schemas/proprety.schema';
 
 export const foundCity = (address: string) => {
   return address.split('/')[0];
@@ -34,4 +33,4 @@ export const filterPropretiesObject = (filter: FilterPropreties) => {
   return filterObject;
 };
 
-export const rentalTypeVerificator = (datas: TypeByRooms) => {};
+// export const rentalTypeVerificator = (datas: TypeByRooms) => {};

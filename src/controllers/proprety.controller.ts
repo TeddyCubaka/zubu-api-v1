@@ -19,7 +19,7 @@ export class PropretyController {
   @Post()
   async createProduct(@Res() response, @Body() proprety: Proprety) {
     console.log(proprety);
-    
+
     const newProduct = await this.propretyService.create(proprety);
     return response.status(HttpStatus.CREATED).json({ newProduct });
   }
