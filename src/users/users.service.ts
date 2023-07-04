@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './users.schema';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { signupData } from 'src/interfaces/users.type';
 
 @Injectable()
@@ -24,14 +24,42 @@ export class UsersService {
   }
 
   async findOneByUsername(username: string): Promise<User | undefined> {
-    return this.UserModel.findOne({ username: username }).exec();
+    return await this.UserModel.findOne({ username: username }).exec();
   }
 
   async findOneByPhoneNumber(phoneNumber: string): Promise<User | undefined> {
-    return this.UserModel.findOne({ phoneNumber: phoneNumber }).exec();
+    return await this.UserModel.findOne({ phoneNumber: phoneNumber }).exec();
   }
 
   async findOneByMail(mail: string): Promise<User | undefined> {
-    return this.UserModel.findOne({ mail: mail }).exec();
+    return await this.UserModel.findOne({ mail: mail }).exec();
+  }
+
+  async findOneById(_id: string): Promise<User | undefined> {
+    return await this.UserModel.findOne({
+      _id: new Types.ObjectId(_id),
+    }).exec();
+  }
+
+  async getAll(): Promise<User[]> {
+    return await this.UserModel.find().exec();
+  }
+
+  async addFavoriteProprety(propretyId: string, userId: string): Promise<any> {
+    const user = await this.UserModel.findOne({
+      _id: new Types.ObjectId(userId),
+    }).exec();
+    if (user == null) {
+      return { message: 'utilisateur non trouvé' };
+    }
+    user.savedPropreties.push(propretyId);
+    return await this.UserModel.findByIdAndUpdate(userId, user, {
+      new: true,
+    })
+      .exec()
+      .then((data) => {
+        return { data, user };
+      })
+      .catch((err) => err);
   }
 }
