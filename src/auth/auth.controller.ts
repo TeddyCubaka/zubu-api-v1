@@ -23,7 +23,14 @@ export class AuthController {
       });
     user.password = await getHashPassword(user.password);
     const newUser = await this.authService.singUp(user);
-    return response.status(HttpStatus.CREATED).json({ newUser });
+    const ServerResponse = {
+      newUser,
+      acces: await this.authService.getToken({
+        userId: newUser._id,
+        username: newUser.username,
+      }),
+    };
+    return response.status(HttpStatus.CREATED).json({ ServerResponse });
   }
 
   @Post('login')
@@ -37,6 +44,12 @@ export class AuthController {
       return response
         .status(HttpStatus.NOT_FOUND)
         .json({ message: 'mail ou mot de passe invalide' });
-    return response.status(HttpStatus.OK).json({ user });
+    return response.status(HttpStatus.OK).json({
+      user,
+      access: await this.authService.getToken({
+        userId: user._id,
+        username: user.username,
+      }),
+    });
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { signupData } from 'src/interfaces/users.type';
+import { getTokenData, signupData } from 'src/interfaces/users.type';
 import { UsersService } from 'src/users/users.service';
 import { verifyPassord } from 'src/utils/user.utils';
 
@@ -8,21 +8,23 @@ import { verifyPassord } from 'src/utils/user.utils';
 export class AuthService {
   constructor(
     private usersService: UsersService,
-    private jwtService: JwtService,
+    private readonly jwtService: JwtService,
   ) {}
+
+  async getToken({ userId, username }: getTokenData): Promise<string> {
+    const payload = {
+      sub: userId,
+      username: username,
+      expireDate: new Date().getTime() + Number(process.env.CUSTOM_EXP_DATE),
+    };
+    return await this.jwtService.signAsync(payload);
+  }
 
   async singUp(datas: signupData): Promise<any> {
     const user: any = await this.usersService.create(datas);
     user.password = '';
-    const payload = {
-      sub: user._id,
-      username: user.username,
-    };
 
-    return {
-      accessToken: await this.jwtService.signAsync(payload),
-      user,
-    };
+    return user;
   }
 
   async signIn(
@@ -45,14 +47,7 @@ export class AuthService {
       return { hasNotFound: true };
     }
     user.password = '';
-    const payload = {
-      sub: user._id,
-      username: user.username,
-    };
 
-    return {
-      accessToken: await this.jwtService.signAsync(payload),
-      user,
-    };
+    return user;
   }
 }

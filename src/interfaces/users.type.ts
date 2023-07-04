@@ -4,3 +4,8 @@ export interface signupData {
   mail: string;
   phoneNumber: string;
 }
+
+export interface getTokenData {
+  username: string;
+  userId: string;
+}
