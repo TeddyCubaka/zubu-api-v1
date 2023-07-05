@@ -18,7 +18,7 @@ export class authMiddleware implements NestMiddleware {
 
     const myTime = new Date().getTime();
 
-    let isUserIdNoValid: boolean = false;
+    let isUserIdNoValid = false;
     await this.usersService
       .findOneById(decodedJwtAccessToken.sub)
       .then((user) => {
