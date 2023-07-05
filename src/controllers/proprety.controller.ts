@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Headers,
   HttpStatus,
   Param,
   Post,
@@ -17,9 +18,12 @@ export class PropretyController {
   constructor(private readonly propretyService: PropretyService) {}
 
   @Post()
-  async createProduct(@Res() response, @Body() proprety: Proprety) {
-    console.log(proprety);
-
+  async createProduct(
+    @Res() response,
+    @Body() proprety: Proprety,
+    @Headers() headers,
+  ) {
+    proprety.owner = headers.authorization.sub;
     const newProduct = await this.propretyService.create(proprety);
     return response.status(HttpStatus.CREATED).json({ newProduct });
   }
@@ -31,7 +35,7 @@ export class PropretyController {
   }
 
   @Get('/select/:propretiesIds')
-  async selectMayById(
+  async selectManyById(
     @Param('propretiesIds') propretiesIds: string,
     @Res() response,
   ) {
