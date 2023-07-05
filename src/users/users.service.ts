@@ -45,14 +45,41 @@ export class UsersService {
     return await this.UserModel.find().exec();
   }
 
-  async addFavoriteProprety(propretyId: string, userId: string): Promise<any> {
+  async addToFavoritePropreties(
+    propretyId: string,
+    userId: string,
+  ): Promise<any> {
     const user = await this.UserModel.findOne({
       _id: new Types.ObjectId(userId),
     }).exec();
     if (user == null) {
       return { message: 'utilisateur non trouvé' };
     }
-    user.savedPropreties.push(propretyId);
+    if (user.savedPropreties.indexOf(propretyId) == -1)
+      user.savedPropreties.push(propretyId);
+    return await this.UserModel.findByIdAndUpdate(userId, user, {
+      new: true,
+    })
+      .exec()
+      .then((data) => {
+        return { data, user };
+      })
+      .catch((err) => err);
+  }
+
+  async removeToFavoritePropreties(
+    propretyId: string,
+    userId: string,
+  ): Promise<any> {
+    const user = await this.UserModel.findOne({
+      _id: new Types.ObjectId(userId),
+    }).exec();
+    if (user == null) {
+      return { message: 'utilisateur non trouvé' };
+    }
+    user.savedPropreties = user.savedPropreties.filter((proprety) => {
+      return proprety !== propretyId;
+    });
     return await this.UserModel.findByIdAndUpdate(userId, user, {
       new: true,
     })

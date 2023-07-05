@@ -19,14 +19,33 @@ export class UserController {
     return response.status(HttpStatus.OK).json(user);
   }
 
-  @Put('saveProprety')
-  async updateOneById(@Res() response, @Req() request) {
+  @Put('save_proprety')
+  async addToFavorite(@Res() response, @Req() request) {
     if (!request.body.propretyId)
       return response
         .status(HttpStatus.OK)
         .json({ message: 'La clé propretyId est abscente' });
     else {
-      const newUpdate = await this.usersService.addFavoriteProprety(
+      const newUpdate = await this.usersService.addToFavoritePropreties(
+        request.body.propretyId,
+        request.headers.authorization.sub,
+      );
+      return response.status(HttpStatus.OK).json({
+        newUpdate,
+        body: request.body,
+        auth: request.headers.authorization.sub,
+      });
+    }
+  }
+
+  @Put('remove_proprety')
+  async removeToFavorite(@Res() response, @Req() request) {
+    if (!request.body.propretyId)
+      return response
+        .status(HttpStatus.OK)
+        .json({ message: 'La clé propretyId est abscente' });
+    else {
+      const newUpdate = await this.usersService.removeToFavoritePropreties(
         request.body.propretyId,
         request.headers.authorization.sub,
       );
