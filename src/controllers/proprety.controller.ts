@@ -31,7 +31,7 @@ export class PropretyController {
   @Get()
   async fetchAll(@Res() response) {
     const propreties = await this.propretyService.readAll();
-    return response.status(HttpStatus.OK).json({ propreties });
+    return response.status(HttpStatus.OK).json(propreties);
   }
 
   @Get('/select/:propretiesIds')
@@ -80,5 +80,11 @@ export class PropretyController {
   async deleteOneById(@Param('id') id: string, @Res() response) {
     const propretyDelete = await this.propretyService.delete(id);
     return response.status(HttpStatus.OK).json({ propretyDelete });
+  }
+
+  @Put('update_all_propreties')
+  async updateAll(@Body() body, @Res() response) {
+    const data = this.propretyService.updateAll(body);
+    return response.status(HttpStatus.OK).json({ data });
   }
 }

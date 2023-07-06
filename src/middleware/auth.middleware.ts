@@ -11,6 +11,10 @@ export class authMiddleware implements NestMiddleware {
   ) {}
 
   async use(request: Request, response: Response, next: NextFunction) {
+    if (request.headers.authorization == undefined)
+      response.status(HttpStatus.UNAUTHORIZED).json({
+        message: 'You need a token to access this route.',
+      });
     const decodedJwtAccessToken: any = this.jwtService.decode(
       request.headers.authorization.split(' ')[1],
     );
