@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Proprety, PropretyDocument } from 'src/schemas/proprety.schema';
+import { filterPropretiesObject } from 'src/utils/propreties.utils';
 
 @Injectable()
 export class PropretyService {
@@ -63,7 +64,16 @@ export class PropretyService {
   }
 
   async updateAll(data: any): Promise<any> {
-    return this.PropretyModel.updateMany({}, data)
+    return this.PropretyModel.updateMany(
+      {},
+      {
+        $rename: {
+          'rentalInformation.monentaryCurrency':
+            'rentalInformation.monetaryCurrency',
+        },
+      },
+    )
+      .exec()
       .then((data) => data)
       .catch((err) => err);
   }

@@ -24,13 +24,13 @@ export class AuthController {
     user.password = await getHashPassword(user.password);
     const newUser = await this.authService.singUp(user);
     const ServerResponse = {
-      newUser,
+      user: newUser,
       acces: await this.authService.getToken({
         userId: newUser._id,
         username: newUser.username,
       }),
     };
-    return response.status(HttpStatus.CREATED).json({ ServerResponse });
+    return response.status(HttpStatus.CREATED).json(ServerResponse);
   }
 
   @Post('login')

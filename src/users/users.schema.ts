@@ -48,6 +48,9 @@ export class User {
   pictureUrl: string;
 
   @Prop()
+  gender: string;
+
+  @Prop()
   pendingVisits: string[];
 
   @Prop()

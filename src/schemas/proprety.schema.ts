@@ -36,7 +36,7 @@ export class RentalInformationType {
   @Prop()
   guarantee: number;
   @Prop()
-  monentaryCurrency: Currencies;
+  monetaryCurrency: Currencies;
   @Prop()
   localisation: string;
   @Prop()
