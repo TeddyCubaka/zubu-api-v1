@@ -76,28 +76,28 @@ interface tenantCharge {
   price: string;
 }
 
-interface StatisticsType {
-  referencingNote: number;
-  averagePiewsPerWeek: Number;
-  averagePrade: number;
-  averageViewsPerMonth: number;
-  personWhoNoted: number;
-  averageVisitsPerWeek: number;
-  viewsPerWeek: [
-    {
-      startTime: string;
-      endTime: string;
-      numberOfView: number;
-    },
-  ];
-  viewsPerMonth: [
-    {
-      startTime: string;
-      endTime: string;
-      numberOfView: number;
-    },
-  ];
-}
+// interface StatisticsType {
+//   referencingNote: number;
+//   averagePiewsPerWeek: number;
+//   averagePrade: number;
+//   averageViewsPerMonth: number;
+//   personWhoNoted: number;
+//   averageVisitsPerWeek: number;
+//   viewsPerWeek: [
+//     {
+//       startTime: string;
+//       endTime: string;
+//       numberOfView: number;
+//     },
+//   ];
+//   viewsPerMonth: [
+//     {
+//       startTime: string;
+//       endTime: string;
+//       numberOfView: number;
+//     },
+//   ];
+// }
 
 @Schema({ timestamps: true })
 export class Proprety {

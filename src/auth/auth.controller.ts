@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
-import { signupData } from 'src/interfaces/users.type';
-import { getHashPassword, signupDataValidator } from 'src/utils/user.utils';
+import { signupData } from '../interfaces/users.type';
+import { getHashPassword, signupDataValidator } from '../utils/user.utils';
 import { AuthService } from './auth.service';
 
 @Controller('auth')

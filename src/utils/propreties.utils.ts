@@ -1,7 +1,7 @@
 import {
   FilterPropreties,
   FindPropretiesFilter,
-} from 'src/interfaces/proprety.type';
+} from '../interfaces/proprety.type';
 
 export const foundCity = (address: string) => {
   return address.split('/')[0];

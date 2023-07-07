@@ -1,4 +1,4 @@
-import { signupData } from 'src/interfaces/users.type';
+import { signupData } from '../interfaces/users.type';
 import * as bcrypt from 'bcrypt';
 
 type DatasStatusType = { passed: boolean; datasMissed: string[] };

@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Proprety, PropretyDocument } from 'src/schemas/proprety.schema';
-import { filterPropretiesObject } from 'src/utils/propreties.utils';
+import { Proprety, PropretyDocument } from '../schemas/proprety.schema';
 
 @Injectable()
 export class PropretyService {

@@ -10,8 +10,8 @@ import {
   Put,
   Res,
 } from '@nestjs/common';
-import { Proprety } from 'src/schemas/proprety.schema';
-import { PropretyService } from 'src/services/proprety.service';
+import { Proprety } from '../schemas/proprety.schema';
+import { PropretyService } from '../services/proprety.service';
 
 @Controller('propreties')
 export class PropretyController {
