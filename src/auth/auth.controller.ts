@@ -23,6 +23,9 @@ export class AuthController {
       });
     user.password = await getHashPassword(user.password);
     const newUser = await this.authService.singUp(user);
+    if (newUser.err) {
+      return response.status(HttpStatus.OK).json(newUser);
+    }
     const ServerResponse = {
       user: newUser,
       acces: await this.authService.getToken({
