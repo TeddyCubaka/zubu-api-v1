@@ -11,12 +11,13 @@ async function bootstrap() {
     allowedHeaders: 'Content-Type, Accept',
   });
   app.setGlobalPrefix('api/v1');
-  // app.use((req, res, next) => {
-  //   res.header('Access-Control-Allow-Origin', '*');
-  //   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  //   res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
-  //   next();
-  // });
   await app.listen(process.env.PORT || 3000);
 }
 export default bootstrap();
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+//   next();
+// });
