@@ -8,7 +8,7 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     preflightContinue: false,
     optionsSuccessStatus: 204,
-    allowedHeaders: '*',
+    allowedHeaders: 'Content-Type, Accept, Accept-Language',
   });
   app.setGlobalPrefix('api/v1');
   await app.listen(process.env.PORT || 3000);
@@ -20,4 +20,4 @@ export default bootstrap();
 //   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 //   res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
 //   next();
-// });  Content-Type, Accept
+// });  
