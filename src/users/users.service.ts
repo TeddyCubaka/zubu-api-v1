@@ -37,9 +37,16 @@ export class UsersService {
   }
 
   async findOneById(_id: string): Promise<User | undefined> {
+    const options = {
+      path: 'propreties',
+      model: 'Proprety',
+      strictPopulate: false, // Ignorer l'erreur si la référence n'existe pas dans le schéma
+    };
     return await this.UserModel.findOne({
       _id: new Types.ObjectId(_id),
-    }).exec();
+    })
+      .populate(options)
+      .exec();
   }
 
   async getAll(): Promise<User[]> {

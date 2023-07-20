@@ -61,7 +61,7 @@ export class User {
 
   @Prop({
     type: [
-      { type: MongooseSchema.Types.ObjectId, ref: 'Propreties', default: [] },
+      { type: MongooseSchema.Types.ObjectId, ref: 'propreties', default: [] },
     ],
   })
   propreties: Types.ObjectId[];

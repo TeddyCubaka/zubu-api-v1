@@ -37,7 +37,7 @@ export class PropretyService {
   }
 
   async readById(id: string): Promise<Proprety> {
-    return await this.PropretyModel.findById(id).exec();
+    return await this.PropretyModel.findById(id).populate('Users').exec();
   }
 
   async update(id: string, Proprety: Proprety): Promise<Proprety> {

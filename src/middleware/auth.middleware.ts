@@ -34,10 +34,10 @@ export class authMiddleware implements NestMiddleware {
       response
         .status(HttpStatus.UNAUTHORIZED)
         .json({ message: 'The token has expired' });
-    else if (isUserIdNoValid)
-      response
-        .status(HttpStatus.UNAUTHORIZED)
-        .json({ message: 'Invalid token.' });
     else next();
+    // else if (isUserIdNoValid)
+    //   response
+    //     .status(HttpStatus.UNAUTHORIZED)
+    //     .json({ message: 'Invalid token.', userId: decodedJwtAccessToken.sub });
   }
 }
