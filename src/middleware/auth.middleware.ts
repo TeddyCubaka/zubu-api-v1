@@ -18,26 +18,34 @@ export class authMiddleware implements NestMiddleware {
     const decodedJwtAccessToken: any = this.jwtService.decode(
       request.headers.authorization.split(' ')[1],
     );
+
+    if (decodedJwtAccessToken == null)
+      return response
+        .status(HttpStatus.UNAUTHORIZED)
+        .json({ message: 'Invalid token.' });
+
     request.headers.authorization = decodedJwtAccessToken;
 
     const myTime = new Date().getTime();
 
     let isUserIdNoValid = false;
-    await this.usersService
-      .findOneById(decodedJwtAccessToken.sub)
-      .then((user) => {
-        if (user == null) isUserIdNoValid = true;
-      })
-      .catch(() => (isUserIdNoValid = true));
+    if (decodedJwtAccessToken.sub) {
+      await this.usersService
+        .findOneById(decodedJwtAccessToken.sub)
+        .then((user) => {
+          if (user == null) isUserIdNoValid = true;
+        })
+        .catch(() => (isUserIdNoValid = true));
+    }
 
     if (decodedJwtAccessToken.expireDate < myTime)
       response
         .status(HttpStatus.UNAUTHORIZED)
         .json({ message: 'The token has expired' });
+    else if (isUserIdNoValid)
+      response
+        .status(HttpStatus.UNAUTHORIZED)
+        .json({ message: 'Invalid token.' });
     else next();
-    // else if (isUserIdNoValid)
-    //   response
-    //     .status(HttpStatus.UNAUTHORIZED)
-    //     .json({ message: 'Invalid token.', userId: decodedJwtAccessToken.sub });
   }
 }
