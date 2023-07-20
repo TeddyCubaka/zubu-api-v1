@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Req,
   Res,
 } from '@nestjs/common';
 import { Proprety } from '../schemas/proprety.schema';
@@ -21,7 +22,7 @@ export class PropretyController {
   async createProduct(
     @Res() response,
     @Body() proprety: Proprety,
-    @Headers() headers,
+    @Headers() headers
   ) {
     proprety.owner = headers.authorization.sub;
     const newProduct = await this.propretyService.create(proprety);

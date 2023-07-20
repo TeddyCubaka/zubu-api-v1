@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Schema as MongooseSchema, Types } from 'mongoose';
 
 export type PropretyDocument = Proprety & Document;
 
@@ -101,8 +101,11 @@ interface tenantCharge {
 
 @Schema({ timestamps: true })
 export class Proprety {
-  @Prop()
-  owner: string;
+  // @Prop()
+  // owner: string;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Users', required: true })
+  owner: Types.ObjectId;
 
   @Prop({ required: true })
   type: string;

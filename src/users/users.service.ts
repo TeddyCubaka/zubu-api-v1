@@ -33,6 +33,7 @@ export class UsersService {
 
   async findOneByMail(mail: string): Promise<User | undefined> {
     return await this.UserModel.findOne({ mail: mail }).exec();
+    // .populate('role', '', this.)
   }
 
   async findOneById(_id: string): Promise<User | undefined> {
@@ -43,6 +44,17 @@ export class UsersService {
 
   async getAll(): Promise<User[]> {
     return await this.UserModel.find().exec();
+  }
+
+  async update(userId: string, body: any): Promise<any> {
+    return await this.UserModel.findByIdAndUpdate(userId, body, {
+      new: true,
+    })
+      .exec()
+      .then((data) => {
+        return { data, body };
+      })
+      .catch((err) => err);
   }
 
   async addToFavoritePropreties(
@@ -80,6 +92,25 @@ export class UsersService {
     user.savedPropreties = user.savedPropreties.filter((proprety) => {
       return proprety !== propretyId;
     });
+    return await this.UserModel.findByIdAndUpdate(userId, user, {
+      new: true,
+    })
+      .exec()
+      .then((data) => {
+        return { data, user };
+      })
+      .catch((err) => err);
+  }
+
+  async addCreateProprety(propretyId: string, userId: string): Promise<any> {
+    const user = await this.UserModel.findOne({
+      _id: new Types.ObjectId(userId),
+    }).exec();
+    if (user == null) {
+      return { message: 'utilisateur non trouvé' };
+    }
+    if (user.propreties.indexOf(new Types.ObjectId(propretyId)) == -1)
+      user.propreties.push(new Types.ObjectId(propretyId));
     return await this.UserModel.findByIdAndUpdate(userId, user, {
       new: true,
     })

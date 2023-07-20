@@ -2,18 +2,26 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Proprety, PropretyDocument } from '../schemas/proprety.schema';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class PropretyService {
   constructor(
     @InjectModel(Proprety.name) private PropretyModel: Model<PropretyDocument>,
+    private usersService: UsersService,
   ) {}
 
   async create(Proprety: Proprety): Promise<Proprety> {
     const newProprety = new this.PropretyModel(Proprety);
     return newProprety
       .save()
-      .then((data) => data)
+      .then(async (data) => {
+        await this.usersService.addCreateProprety(
+          data._id,
+          data.owner.toString(),
+        );
+        return data;
+      })
       .catch((err) => {
         if (err.code === 11000)
           return {

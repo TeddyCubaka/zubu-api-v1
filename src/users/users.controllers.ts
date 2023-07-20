@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Headers,
   HttpStatus,
   Param,
   Put,
@@ -17,6 +18,19 @@ export class UserController {
   async getOneUserById(@Res() response, @Param() id) {
     const user = await this.usersService.findOneById(id);
     return response.status(HttpStatus.OK).json(user);
+  }
+
+  @Put('/:id')
+  async updateUser(@Res() response, @Req() request) {
+    const newUpdate = await this.usersService.update(
+      request.headers.authorization.sub,
+      request.body,
+    );
+    return response.status(HttpStatus.OK).json({
+      newUpdate,
+      body: request.body,
+      auth: request.headers.authorization.sub,
+    });
   }
 
   @Put('save_proprety')
@@ -58,7 +72,7 @@ export class UserController {
   }
 
   @Get()
-  async fetchAll(@Res() response) {
+  async fetchAll(@Res() response, @Headers() headers) {
     const user = await this.usersService.getAll();
     return response.status(HttpStatus.OK).json(user);
   }
