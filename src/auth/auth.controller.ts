@@ -28,7 +28,7 @@ export class AuthController {
     }
     const ServerResponse = {
       user: newUser,
-      acces: await this.authService.getToken({
+      access: await this.authService.getToken({
         userId: newUser._id,
         username: newUser.username,
       }),

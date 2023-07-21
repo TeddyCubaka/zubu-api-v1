@@ -24,15 +24,36 @@ export class UsersService {
   }
 
   async findOneByUsername(username: string): Promise<User | undefined> {
-    return await this.UserModel.findOne({ username: username }).exec();
+    const options = {
+      path: 'propreties',
+      model: 'Proprety',
+      strictPopulate: false, // Ignorer l'erreur si la référence n'existe pas dans le schéma
+    };
+    return await this.UserModel.findOne({ username: username })
+      .populate(options)
+      .exec();
   }
 
   async findOneByPhoneNumber(phoneNumber: string): Promise<User | undefined> {
-    return await this.UserModel.findOne({ phoneNumber: phoneNumber }).exec();
+    const options = {
+      path: 'propreties',
+      model: 'Proprety',
+      strictPopulate: false, // Ignorer l'erreur si la référence n'existe pas dans le schéma
+    };
+    return await this.UserModel.findOne({ phoneNumber: phoneNumber })
+      .populate(options)
+      .exec();
   }
 
   async findOneByMail(mail: string): Promise<User | undefined> {
-    return await this.UserModel.findOne({ mail: mail }).exec();
+    const options = {
+      path: 'propreties',
+      model: 'Proprety',
+      strictPopulate: false, // Ignorer l'erreur si la référence n'existe pas dans le schéma
+    };
+    return await this.UserModel.findOne({ mail: mail })
+      .populate(options)
+      .exec();
     // .populate('role', '', this.)
   }
 
