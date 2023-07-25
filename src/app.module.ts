@@ -18,9 +18,7 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env', '.env.dev'] }),
-    MongooseModule.forRoot(
-      'mongodb+srv://teddy:birhingingwa@woubou.gzzbgka.mongodb.net/woubou',
-    ),
+    MongooseModule.forRoot(process.env.DATABASE_URL),
     MongooseModule.forFeature([
       { name: Proprety.name, schema: PropretySchema },
     ]),

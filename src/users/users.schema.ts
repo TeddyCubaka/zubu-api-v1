@@ -45,7 +45,7 @@ export class User {
   phoneNumber: string;
 
   @Prop()
-  pictureUrl: string;
+  pictureUrl: string; 
 
   @Prop()
   gender: string;
