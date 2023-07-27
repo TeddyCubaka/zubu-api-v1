@@ -29,18 +29,33 @@
       "assetId": "uuiddidiidudiid_883Ii"
     }
   ],
-  "rooms": [
-    {
-      "room": "saloon",
-      "number": 2
+  "rooms": {
+    "interior": {
+      "bedrooms": 0,
+      "livingRoom": 0,
+      "lounge": 0,
+      "diningRoom": 0,
+      "kitchen": 0,
+      "floor": 0,
+      "toilet": 0,
+      "bathroom": 0
+    },
+    "exterior": {
+      "toilets": 0,
+      "bathrooms": 0,
+      "garage": 0,
+      "garden": 0,
+      "terrace": 0,
+      "balcony": 0
     }
-  ],
-  "tenantCharge": [
-    {
-      "charge": "electricity",
-      "price": "3000 fc"
-    }
-  ],
-  "visits": ["uuid"],
-  "questions": ["uuid"]
+  },
+  "tenantCharge": {
+    "electricity": "100 $",
+    "water": "100 $",
+    "dustbin": "100 $",
+    "homeCare": "100 $",
+    "housePainting": "100 $"
+  },
+  "visits": [],
+  "questions": []
 }

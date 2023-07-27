@@ -46,7 +46,7 @@ export class AuthService {
     if (!isPasswordValid) {
       return { hasNotFound: true };
     }
-    user.password = '';
+    // user.password = '';
 
     return user;
   }
